@@ -1,0 +1,16 @@
+<h1>Student Details</h1>
+
+<p>Student first name: <%= @student_data[:students_fn] %></p>
+<p>Student last name: <%= @student_data[:students_ln] %></p>
+<% if @student_data[:invoicees_fn] != nil %>
+  <p>Invoicee: <%= @student_data[:invoicees_fn] %> <%= @student_data[:invoicees_ln] %></p>
+<% else %>
+  <p>Invoicee: <em>no assigned invoicee - edit student to assign one</em></p>
+<% end %>
+
+
+<h2>Actions</h2>
+<ul>
+	<li><a href="/admin/students/<%= @id %>/edit">Edit Student Details</a></li>
+	<li><a href="/students/<%= @id %>/archive">Archive Student</a></li>
+</ul>

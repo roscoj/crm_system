@@ -1,0 +1,46 @@
+---
+- :pupil_id: 0
+  :pupil_name: Ross
+  :first_name: Martin
+  :last_name: Jarrett
+  :telephone: '07702826234'
+  :email: martin.jarrett@gmail.com
+  :street_address: Finch House
+  :post_code: OX171RB
+  :pupil_active: 'false'
+- :pupil_id: 1
+  :pupil_name: Amy
+  :first_name: John
+  :last_name: Allington
+  :telephone: '07966534188'
+  :email: a.allington1@gmail.com
+  :street_address: Flat 15, Coastal Place
+  :post_code: BN34BS
+  :pupil_active: 'true'
+- :pupil_id: 2
+  :pupil_name: Three
+  :first_name: Three
+  :last_name: Three
+  :telephone: Three
+  :email: Three
+  :street_address: Three
+  :post_code: Three
+  :pupil_active: 'false'
+- :pupil_id: 3
+  :pupil_name: Ben
+  :first_name: Harold
+  :last_name: Stacey
+  :telephone: '0876543456'
+  :email: ben@gmail.com
+  :street_address: Something Road
+  :post_code: BN66TG
+  :pupil_active: 'true'
+- :pupil_id: 4
+  :pupil_name: hjl
+  :first_name: hjkl
+  :last_name: hjkl
+  :telephone: hjkl
+  :email: hjkl
+  :street_address: hjkl
+  :post_code: hjkl
+  :pupil_active: 'true'

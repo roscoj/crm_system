@@ -1,0 +1,36 @@
+<h2>Current Balances</h2>
+<table>
+	<tr>
+		<th>Invoicee</th>
+    <th>Balance</th>
+  </tr>
+  <% @balance_data.each do |row| %>
+    <tr>
+      <td><%= row[:invoicee] %></td>
+      <td><%= row[:balance] %></td>
+      <td><a href="/invoicing/invoice/<%= row[:id] %>">Create Invoice</a></td>
+    </tr>
+  <% end %>
+</table>
+
+<h2>All Sessions</h2>
+<a href="invoicing/new_session">Add New Session</a>
+<table>
+	<tr>
+		<th>Student</th>
+		<th>Invoicee</th>
+    <th>Date</th>
+    <th>Duration</th>
+    <th>Cost</th>
+  </tr>
+  <% @session_data.each do |row| %>
+    <tr>
+      <td><%= row[:student] %></td>
+      <td><%= row[:invoicee] %></td>
+      <td><%= row[:date] %></td>
+      <td><%= row[:duration] %></td>
+      <td><%= row[:cost] %></td>
+    </tr>
+  <% end %>
+</table>
+

@@ -1,0 +1,10 @@
+<h2>Invoicee Details</h2>
+
+<p>Invoicee first name: <%= @invoicee_data[:first_name] %></p>
+<p>Invoicee last name: <%=  @invoicee_data[:last_name]%></p>
+
+<p> [LIST OF LINKS TO INVOICES WILL GO HERE]</p>
+<h2>Actions</h2>
+<ul>
+	<li><a href="/admin/invoicees/<%= @invoicee_data[:id] %>/edit">Edit Invoicee Details</a></li>
+</ul>

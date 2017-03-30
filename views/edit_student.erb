@@ -1,0 +1,42 @@
+<h1>Edit a Student Details</h1>
+
+<form name="edited_pupil_info" action="/admin/students/<%= @id %>/edit" method="post">
+
+  <div>
+    <label for="student_first_name">
+      Student First Name:
+      <input name="student_fn" type="text" value="<%= @student_data[:students_fn] %>">
+    </label>
+  </div>
+
+  <div>
+    <label for="student_last_name">  
+      Student Last Name:
+      <input name="student_ln" type="text" value="<%= @student_data[:students_ln] %>">
+    </label>
+  </div>
+
+  <div>
+    <label for="assigned_invoicee">  
+      Assign an Invoicee to Student:
+      <select name="assigned_invoicee">
+				<% @invoicees_data.each do |row| %>
+					<% if row[:id] == @student_data[:invoicee_id] %>			
+						<option value="<%= row[:id] %>" selected >
+							<%= row[:first_name] %> <%= row[:last_name] %>
+						</option>
+					<% else %>
+						<option value="<%= row[:id] %>">
+							<%= row[:first_name] %> <%= row[:last_name] %>
+						</option>
+					<% end %>
+				<% end %>
+			</select>
+    </label>
+  </div>
+
+  <div>
+    <button type="submit">Save Edited Information</button>
+  </div>
+
+</form>

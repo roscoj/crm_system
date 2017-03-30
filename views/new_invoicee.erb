@@ -1,0 +1,62 @@
+<h1>Add a New Invoicee</h1>
+
+<form name="invoicee_info" action="/admin/new_invoicee" method="post">
+
+  <div>
+    <label for="first_name">
+      First Name:
+     	<input name="first_name" type="text" required>
+    </label>
+  </div>
+
+  <div>
+    <label for="last_name">
+      Last Name:
+      <input name="last_name" type="text" required>
+    </label>
+  </div>
+
+  <div>
+    <label for="telephone">
+      Telephone:
+      <input name="telephone" type="text" required>
+    </label>
+	</div>
+	
+  <div>
+    <label for="email">
+      Email:
+      <input name="email" type="text" required>
+    </label>
+  </div>
+
+  <div>
+    <label for="payment_method">
+      Payment Method:
+			<select name="payment_method">
+				<option value="CASH">Cash</option>
+				<option value="BACS">Bacs</option>
+				<option value="DD">DD</option>
+			</select>
+    </label>
+  </div>
+
+
+  <div>
+    <label for="address_id">
+      Address:
+			<select name="address_id">
+        <% @address_info.each do |row| %>
+          <option value="<%= row[:id] %>">
+            <%= row[:address_line_1] %> <%= row[:address_line_2] %> <%= row[:town] %> <%= row[:postcode] %>
+          </option>
+        <% end %>
+			</select>
+    </label>
+  <a href="/invoicing/new_address">Add Address</a>
+  </div>
+  <div>
+    <button type="submit">Save Invoicee</button>
+  </div>
+
+</form>

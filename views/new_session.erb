@@ -1,0 +1,44 @@
+<h2>Add a New Session</h2>
+
+
+<form name="session" action="/invoicing/new_session" method="post">
+
+  <div>
+    <label for="student">  
+      Choose student:
+      <select name="student">
+        <% @student_data.each do |row| %>
+          <option value="<%= row[:students_id] %>" >
+            <%= row[:students_fn] %> <%= row[:students_ln] %>
+          </option>
+        <% end %>
+			</select>
+    </label>
+  </div>
+
+  <div>
+    <label for="date">  
+      Date (dd/mm/yyyy):
+      <input name="session_date" type="text" required>
+    </label>
+  </div>
+
+  <div>
+    <label for="start_time">  
+      Start time (hh:mm):
+      <input name="start_time" type="text" required>
+    </label>
+  </div>
+
+  <div>
+    <label for="end_time">  
+      End time (hh:mm):
+      <input name="end_time" type="text" required>
+    </label>
+  </div>
+
+  <div>
+    <button type="submit">Save Session Info</button>
+  </div>
+
+</form>

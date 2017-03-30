@@ -1,0 +1,45 @@
+<h1>Students and Invoicing</h1>
+
+<h2>Students</h2>
+<a href="admin/new_student">Add Student</a>
+<table>
+	<tr>
+		<th>Student Name</th>
+		<th>Invoicee Name</th>
+		<th>Contact Number</th>
+	</tr>
+	<% @student_data.each do |row| %>
+		<tr>
+			<td><a href="/admin/students/<%= row[:students_id] %>"><%= row[:students_fn] %> <%= row[:students_ln] %></a></td>
+			<td><a href="/admin/invoicees/<%= row[:inv_id] %>"><%= row[:invoicees_fn] %> <%= row[:invoicees_ln] %></td>
+			<td><%= row[:invoicees_tel] %></td>
+		</tr>
+	<% end %>
+</table>
+
+<h2>Invoicees</h2>
+<a href="admin/new_address">Add Address</a>
+<a href="admin/new_invoicee">Add Invoicee (add address first)</a>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Telephone</th>
+		<th>Email</th>
+		<th>Street Address</th>
+		<th>Postcode</th>
+		<th>Payment Method</th>
+	</tr>
+	<% @invoicee_data.each do |row| %>
+		<tr>
+			<td><a href="/admin/invoicees/<%= row[:id] %>"><%= row[:first_name] %> <%= row[:last_name] %></a></td>
+			<td><%= row[:telephone] %> </td>
+			<td><%= row[:email] %></td>
+			<td>
+				<%= row[:address_line_1] %> <%= row[:address_line_2] %> <%= row[:town] %> 
+			</td>
+			<td><%= row[:postcode] %></td>
+			<td><%= row[:payment_method] %></td>
+    </tr>
+	<% end %>
+</table>
+
