@@ -3,56 +3,57 @@ require "sequel"
 DB = Sequel.connect("postgres://localhost/crm_sys")
 
 class SequelDatastore
-	def initialize(logger)
-		DB.logger = logger
-	end
+  def initialize(logger)
+    DB.logger = logger
+  end
 
-	def all_students 
-		DB[:students]
-	end
+  def all_students 
+    DB[:students]
+  end
 
-	def all_invoicees
-		DB[:invoicees]
-	end
+  def all_invoicees
+    DB[:invoicees]
+  end
 
   def all_addresses
     DB[:addresses]
   end
 
-	def add_new_student(first_name, last_name)
-		DB[:students].insert([:first_name, :last_name], [first_name, last_name])
-	end
+  def add_new_student(first_name, last_name)
+    DB[:students].insert([:first_name, :last_name], [first_name, last_name])
+  end
 
-	def students_and_invoicees
+  def students_and_invoicees
     results = DB[:students].left_join(:invoicees, id: :invoicee_id).
     
-		select do 
-			[ students__first_name.as(students_fn),
-		 		students__last_name.as(students_ln),
-				students__id.as(students_id),
-				students__invoicee_id.as(invoicee_id) ]
-		end.
+    select do 
+      [ students__first_name.as(students_fn),
+        students__last_name.as(students_ln),
+        students__id.as(students_id),
+        students__invoicee_id.as(invoicee_id) ]
+    end.
     
-		select_append do
+    select_append do
       [ invoicees__first_name.as(invoicees_fn),
         invoicees__last_name.as(invoicees_ln),
-				invoicees__telephone.as(invoicees_tel),
-				invoicees__email.as(invoicees_email), 
+        invoicees__telephone.as(invoicees_tel),
+        invoicees__email.as(invoicees_email), 
         invoicees__id.as(inv_id) ]
-		end
-		results
-	end
+    end
+    results
+  end
 
-	def all_students_and_invoicees
-		students_and_invoicees.all
-	end
-	
-	def single_student_and_invoicee(id)
-		students_and_invoicees.first(students__id: id)
-	end
+  def all_students_and_invoicees
+    students_and_invoicees.all
+  end
 
-	def invoicees_and_addresses
+  def single_student_and_invoicee(id)
+    students_and_invoicees.first(students__id: id)
+  end
+
+  def invoicees_and_addresses
     results = DB[:invoicees].join(:addresses, id: :address_id).
+
 
       select do
         [ invoicees__id.as(id),
@@ -77,17 +78,17 @@ class SequelDatastore
     invoicees_and_addresses.all
   end
 
-	def single_invoicee_and_address(id)
+  def single_invoicee_and_address(id)
     invoicees_and_addresses.first(invoicees__id: id)
-	end
+  end
 
-	def invoicee_ids
-		all_invoicees.select(:id).all
-	end
+  def invoicee_ids
+    all_invoicees.select(:id).all
+  end
 
-	def update_student(id, first_name, last_name, assigned_invoicee)
+  def update_student(id, first_name, last_name, assigned_invoicee)
     DB[:students].where(id: id).update(first_name: first_name, last_name: last_name, invoicee_id: assigned_invoicee)
-	end
+  end
 
   def add_new_invoicee(fname, lname, tel, email, pay_method, address_id)
     DB[:invoicees].insert(
