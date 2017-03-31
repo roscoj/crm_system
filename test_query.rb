@@ -4,56 +4,56 @@ require "pry"
 DB = Sequel.connect("postgres://localhost/crm_sys")
 class SequelDatastore
 
-	def all_students 
-		DB[:students]
-	end
+  def all_students 
+    DB[:students]
+  end
 
-	def all_invoicees
-		DB[:invoicees]
-	end
+  def all_invoicees
+    DB[:invoicees]
+  end
 
-	def new_student(first_name, last_name)
-		DB[:students].insert([:first_name, :last_name], [first_name, last_name])
-	end
+  def new_student(first_name, last_name)
+    DB[:students].insert([:first_name, :last_name], [first_name, last_name])
+  end
 
-	def fetch_student_invoicee_details
+  def fetch_student_invoicee_details
     results = DB[:students].left_join(:invoicees, id: :invoicee_id).
     
-		select do 
-			[ students__first_name.as(students_fn),
-		 		students__last_name.as(students_ln),
-				students__id.as(students_id),
-				students__invoicee_id.as(invoicee_id) ]
-		end.
+    select do 
+      [ students__first_name.as(students_fn),
+         students__last_name.as(students_ln),
+        students__id.as(students_id),
+        students__invoicee_id.as(invoicee_id) ]
+    end.
     
-		select_append do
+    select_append do
       [ invoicees__first_name.as(invoicees_fn),
         invoicees__last_name.as(invoicees_ln),
-				invoicees__telephone.as(invoicees_tel),
-				invoicees__email.as(invoicees_email) ]
-		end
-		results
-	end
+        invoicees__telephone.as(invoicees_tel),
+        invoicees__email.as(invoicees_email) ]
+    end
+    results
+  end
 
-	def all_student_invoicee_details
-		fetch_student_invoicee_details.all
-	end
-	
-	def single_student_invoicee_details(id)
-		fetch_student_invoicee_details.first(students__id: id)
-	end
+  def all_student_invoicee_details
+    fetch_student_invoicee_details.all
+  end
+  
+  def single_student_invoicee_details(id)
+    fetch_student_invoicee_details.first(students__id: id)
+  end
 
-	def fetch_invoicee_details 
-		all_invoicees.all
-	end
+  def fetch_invoicee_details 
+    all_invoicees.all
+  end
 
-	def fetch_invoicee_ids
-		all_invoicees.select(:id).all
-	end
+  def fetch_invoicee_ids
+    all_invoicees.select(:id).all
+  end
 
-	def invoicee_and_addresses
-		DB[:invoicees].join(:addresses, id: :address_id).all
-	end
+  def invoicee_and_addresses
+    DB[:invoicees].join(:addresses, id: :address_id).all
+  end
 
 
 
