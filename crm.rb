@@ -7,16 +7,16 @@ also_reload "sequel_datastore.rb"
 
 
 before do
-	@storage = SequelDatastore.new(logger)
+  @storage = SequelDatastore.new(logger)
 end
 
 get "/" do
-	erb :home
+  erb :home
 end
 
 get "/admin" do
   @invoicee_data = @storage.all_invoicees_and_addresses
-	@student_data = @storage.all_students_and_invoicees
+  @student_data = @storage.all_students_and_invoicees
   erb :admin
 end
 
@@ -25,33 +25,33 @@ get "/admin/new_student" do
 end
 
 post "/admin/new_student" do
-	first_name = params[:first_name]
-	last_name = params[:last_name]
-	@storage.add_new_student(first_name, last_name)
-	redirect "/admin"
+  first_name = params[:first_name]
+  last_name = params[:last_name]
+  @storage.add_new_student(first_name, last_name)
+  redirect "/admin"
 end
 
 get "/admin/students/:id" do
-	@id = params[:id]
-	@student_data = @storage.single_student_and_invoicee(@id)
+  @id = params[:id]
+  @student_data = @storage.single_student_and_invoicee(@id)
   erb :student
 end
 
 get '/admin/students/:id/edit' do
-	@id = params[:id]
-	@student_data = @storage.single_student_and_invoicee(@id)
-	@invoicees_data = @storage.invoicees_and_addresses
-	@invoicee_ids = @storage.invoicee_ids.map { |row| row.values }.flatten
+  @id = params[:id]
+  @student_data = @storage.single_student_and_invoicee(@id)
+  @invoicees_data = @storage.invoicees_and_addresses
+  @invoicee_ids = @storage.invoicee_ids.map { |row| row.values }.flatten
   erb :edit_student
 end
 
 post "/admin/students/:id/edit" do
-	id = params[:id]
-	first_name = params[:student_fn]
-	last_name = params[:student_ln]
-	assigned_invoicee = params[:assigned_invoicee]
+  id = params[:id]
+  first_name = params[:student_fn]
+  last_name = params[:student_ln]
+  assigned_invoicee = params[:assigned_invoicee]
   @storage.update_student(id, first_name, last_name, assigned_invoicee)
-	redirect "/students/#{id}"
+  redirect "/students/#{id}"
 end
 
 get "/admin/new_address" do
@@ -69,7 +69,7 @@ end
 
 get "/admin/new_invoicee" do
   @address_info = @storage.all_addresses_info
-	erb :new_invoicee
+  erb :new_invoicee
 end
 
 post "/admin/new_invoicee" do
@@ -84,13 +84,13 @@ post "/admin/new_invoicee" do
 end
 
 get "/admin/invoicees/:id" do
-	id = params[:id]
+  id = params[:id]
   @invoicee_data = @storage.single_invoicee_and_address(id)
   erb :invoicee
 end
 
 get "/admin/invoicees/:id/edit" do
-	id = params[:id]
+  id = params[:id]
   @payment_methods = ['DD', 'CASH', 'BACS']
   @invoicee_data = @storage.single_invoicee_and_address(id)
   @addresses = @storage.all_addresses_info
@@ -110,15 +110,15 @@ post "/admin/invoicees/:id/edit" do
 end
 
 get "/invoicing" do
-	@student_data = @storage.all_students_and_invoicees
+  @student_data = @storage.all_students_and_invoicees
   @balance_data = @storage.invoicee_balances
   @invoicee_data = @storage.invoicees_and_addresses
   @session_data = @storage.all_session_data
-	erb :invoicing
+  erb :invoicing
 end
 
 get "/invoicing/new_session" do
-	@student_data = @storage.all_students_and_invoicees
+  @student_data = @storage.all_students_and_invoicees
   erb :new_session
 end
 
@@ -128,7 +128,7 @@ def format_timestamp(date, time)
 end
 
 post "/invoicing/new_session" do
-	@student_data = @storage.all_students_and_invoicees
+  @student_data = @storage.all_students_and_invoicees
   student_id = params[:student]
   date = params[:session_date]
   start_time = format_timestamp(date, params[:start_time])
